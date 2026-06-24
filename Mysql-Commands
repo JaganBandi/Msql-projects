@@ -1,0 +1,535 @@
+MYSQL COMMANDS
+********************************
+Command 1: SHOW DATABASES;
+
+->To see the databases on a server
+
+Command 2: CREATE DATABASE database_name;
+
+->To create a database
+
+Command 3: USE database_name;
+
+->This command is used to select a database
+
+Command 4: DROP DATABASE database_name;
+
+->Delete a database
+
+command 5: CREATE TABLE table_name(
+              id INT,
+              name VARCHAR(50)
+              );
+
+->Used to create a table
+
+Command 6: SHOW TABLES;
+
+->To see the tables
+
+Command 7: DESC table_name;
+
+->To Describe tables;
+
+Command 8: DROP TABLE table_name;
+
+->To delete a table
+
+Command 9: a.INSERT INTO table_name
+           VALUES(value1,value2);
+->Insert the values in a table
+
+           b.INSERT INTO table_name
+            VALUES(value1,value2),(value1,value2);
+->Insert the multiple values
+ here,strings are use single qutoes,numbers do not use quotes            
+
+Command 10:SELECT * FROM table_name;
+ 
+ ->To view the data in the particular table
+
+Command 11:SELECT * FROM table_name WHERE condition;
+
+ Example: SELECT * FROM students WHERE id=1001;
+
+->Use to filtering the data
+
+command 12: SELECT * FROM table_name ORDER BY coloumn_name DESC;
+
+  Example : SELECT * FROM employees ORDER BY emp_salary DESC;
+
+-->use to sort the salary highest to lowest
+
+->command : SELECT * FROM employees ORDER BY emp_salary ASC;
+
+-->use tp sort the salary accending order
+
+command 13: SELECT COUNT(*) FROM table_name;
+ 
+ Example : SELECT COUNT(*) FROM employees;
+
+-->use to count the total number of rows in the table 
+
+command 14: SELECT MIN(column_name) FROM tabe_name;
+  
+ Example : SELECT MIN(emp_salary) FROM employees;
+
+-->use to get the minimum value in the table
+
+command 15:SELECT MAX(column_name) FROM table_name;
+
+-->use to get maximum value in the table
+
+command 16:SELECT AVG(column_name) FROM table_name;
+
+-->use to get the average value in the table 
+
+command 17:SELECT * FROM table_name WHERE coloumn_name LIKE 'letter%';
+
+ Example :SELECT * FROM employees WHERE emp_name LIKE'j%';
+
+-->use to search for names ,filter j letter above command show the table whos name start with letter j.
+
+command 18 : SELECT column_name, column_name FROM table_name;
+
+Example : SELECT emp_name, emp_salary FROM employees;
+
+-->use to display the specific columns in the table.
+
+Command 19:UPDATE table_name SET column_name=value WHERE condition;
+
+->Use to update the existing table
+
+ Example: UPDATE students SET name='jagan' WHERE id=1001;
+
+
+command 20: UPDATE table_name SET column_name = NULL;
+
+-->use to removimg the incorrect values
+
+
+Command 21:DELETE FROM table_name WHERE condition;
+
+ ->Use to deleting the duplicate & particular data 
+
+ Example:DELETE FROM students WHERE id=1002;
+
+
+command 22:ALTER TABLE table_name ADD coloumn_name;
+
+Example: ALTER TABLE employees ADD emp_age INT;
+
+-->use add the column in the table.
+
+-->here , if you create a date 0f birth column then you use datatype is date
+
+ Example : ALTER TABLE employees ADD emp_DOB DATE;
+
+ command 23: ALTER TABLE table_name MODIFY COLUMN column_name datatype;
+
+ -->use to change the datatype
+
+ Example : ALTER TABLE table_name MODIFY COLUMN emp_DOB DATE;
+
+command 24: ALTER TABLE table_name DROP COLUMN column_name;
+
+-->Use to delete a column in the table
+
+Example : ALTER TABLE employees DROP COLUMN emp_age;
+
+Rename column : ALTER TABLE department RENAME COLUMN id TO dept_id;
+
+---> use to rename the column 
+
+command 25: SELECT * FROM employees LIMIT number;
+
+-->Use to showing only few records in the table
+
+Example : SELECT * FROM employees LIMIT 3;
+
+command 26: SELECT DISTINCT column_name FROM table_name;
+
+--> use to unique values in the table
+
+Example : SELECT DISTINCT emp_department FROM employees;
+
+command 27 : SELECT column_name, COUNT(*) FROM table_name GROUP BY column_name;
+
+-->Use for groups column wise
+
+Example : SELECT emp_department, COUNT(*) FROM employees GROUP BY emp_department;
+
+command 28 : SELECT SUM(column_name) FROM table_name;
+
+--> Use to add the numerical values in the table
+
+Example : SELECT SUM(emp_salary) FROM employees;
+
+command 29:SELECT * FROM table_name WHERE column_name BETWEEN value1 AND value2;
+
+-->Use to filter the values range the table
+
+Example : SELECT * FROM employees WHERE emp_salary BETWEEN 20000 AND 50000;
+
+************************************************************************************
+OPERATORS
+************************************************************************************
+operators : SQL operators are reserved words or symbols used to filter, manipulate, calculate, and compare data within a database query
+
+
+1. AND
+
+ --> ALL CONDITION TRUE
+
+  Syntax : SELECT * FROM table_name WHERE column_name = value AND column_name = value;
+
+ Example: SELECT * FROM employees WHERE emp_id = 101 AND emp_name = 'Jagan';
+
+
+2. OR 
+
+-->Atleast one condition is true
+
+ Syntax : SELECT * FROM table_name WHERE column_name = value OR column_name = value;
+
+ Example : SELECT * FROM employees WHERE emp_name = 'Jagan' OR emp_name = 'Raju';
+
+
+3.IN 
+
+--> Matches any value in the list
+
+Syntax : SELECT * FROM table_name WHERE condition IN (VALUES);
+
+Example : SELECT * FROM employees WHERE emp_name IN ('JAGAN', 'RAJU', 'SOMU');
+
+
+4.NOT IN
+
+--> Excludes value from a list
+
+Syntax : SELECT * FROM table_name WHERE column_name NOT IN value;
+
+Example : SELECT * FROM worker WHERE name NOT IN ('Ramu');
+
+
+5. BETWEEN 
+
+--> filter values within a range
+
+Syntax : SELECT * FROM table_name WHERE CONDITION;
+
+Example : SELECT * FROM employees WHERE emp_id BETWEEN 101 AND 104;
+
+*************************************************************************  
+CONSTRAINTS
+*************************************************************************
+Constraints are rules applied to table columns to ensure data accuracy and integrity.
+
+1. PRIMARY KEY
+
+  --> Unique values only no null values and easy to identify the each row
+
+  Example :  CREATE TABLE students(
+              id INT PRIMARY KEY,
+              name VARCHAR(50)
+              );
+
+2.NOT NULL
+
+ --> Value is mandatory Cannot insert NULL
+
+Example : CREATE TABLE employees(
+           emp_id INT,
+           emp_name VARCHAR(50) NOT NULL
+          );
+
+3. UNIQUE 
+
+-->Prevents duplicate values Commonly used for email, phone number, username
+
+Example : CREATE TABLE employees(
+        id INT,
+        email VARCHAR(100) UNIQUE
+         );
+
+4. DEFAULT
+
+-->Automatically inserts a value if none is provided
+
+Example : CREATE TABLE employees(
+           emp_id INT,
+           city VARCHAR(50) DEFAULT 'BANGLORE'
+            );
+
+5. UNIQUE + NOT NULL
+
+--> Values must be provided Values cannot be duplicated
+
+Example :  CREATE TABLE employees(
+           emp_mail VARCHAR(100) UNIQUE NOT NULL
+            );
+
+
+************************************************************************************************
+JOINS
+************************************************************************************************
+JOINS : joins are used to combain the data from two or more tables by using column names
+
+1. INNER JOIN: returns only matching rows from both tables
+ 
+  Syntax  : SELECT columns FROM table 1 INNER JOIN table 2 ON table1.column = table2.column;
+
+  Example : SELECT w.id, w.name, d.dept_name FROM workers w INNER JOIN department d ON w.dept_id = d.dept_id;
+
+Filter the Condition :
+ 
+    SELECT columns FROM table1 INNER JOIN table2 ON table1.column = table2.column WHERE d.dept_name = 'dept-name';
+
+2. LEFT JOIN : Returns all records from the left table and matching records from the right table. Non-matching rows show NULL.
+
+  Syntax : SELECT coloumns FROM table 1 LEFT JOIN table 2 ON table1.column = table2.column;
+   
+  Example : SELECT w.id, w.name, d.dept_name FROM workers w LEFT JOIN department d ON W.dept_id = d.dept_id;
+
+
+3. RIGHT JOIN : Right join returns all joins from the right table and matching rows from the left table. if there is no match the left table column contains will NULL.
+
+ Syntax : SELECT column_name FROM left_table RIGHT right_table ON left_table.column_name = right_table.column_name;
+
+ Example : SELECT w.id, w.name, d.dept_name FROM workers w RIGHT JOIN department d ON w.dept_id = d.dept_id;
+
+4.SELF JOIN : A SELF JOIN is a join in which a table is joined with itself. It is commonly used to represent hierarchical relationships such as Employee–Manager.
+
+Syntax : SELECT a.column1, b.column2 FROM table_name a JOIN table_name b ON a.comman_column = b.comman_column;
+
+Example : SELECT e.emp_name AS Employee, m.emp_name AS Manager FROM employee_manager e LEFT JOIN employee_manager m ON e.manager_id = m.emp_id;
+
+
+************************************************************************************************************************
+FOREIGH KEY
+************************************************************************************************************************
+Defination : Foreign key is a column in the child table that refernce to the Primary key of the parent table and ensures that valid related values can be inserted , maintaining referential integrity
+
+
+
+
+Formula :
+
+Parent Table
+--------------
+dept_id (PRIMARY KEY) --
+101
+102
+103
+
+     ↑
+     │ (REFERENCES)
+     │
+Child Table
+--------------
+emp_id
+emp_name
+dept_id (FOREIGN KEY)
+
+
+ CREATE TABLE employees ( emp_id INT PRIMARY KEY, emp_name VARCHAR(50), dept_id INT, FOREIGN KEY (dept_id) REFERENCES department(dept_id) );
+
+
+***********************************************************************************************************
+ON DELETE CASECADE
+***********************************************************************************************************
+ON DELETE CASCADE is a Foreign Key option that automatically deletes related rows from the child table when the corresponding row in the parent table is deleted.
+
+Example :
+
+1. Crate table :
+    
+    CREATE TABLE students (
+        id INT PRIMARY KEY,
+        name VARCHAR(50),
+        dept_id INT,
+        FOREIGN KEY (dept_id)
+        REFERENCES department(dept_id)
+        ON DELETE CASCADE
+        );
+
+      this is a child table 
+
+2. Delete parent table :
+  
+     DELETE FROM department WHERE dept_id = 101;
+
+    if you delete the parent table where the dept_id 101 it automaticall delete the child table where dept_id = 101.
+
+*************************************************************************************************
+ON UPDATE CASCADE
+*************************************************************************************************
+ON UPDATE CASCADE automatically updates the matching Foreign Key values in the child table whenever the referenced Primary Key value in the parent table is updated.
+
+Example :
+
+1. Crate table :
+    
+    CREATE TABLE students (
+        id INT PRIMARY KEY,
+        name VARCHAR(50),
+        dept_id INT,
+        FOREIGN KEY (dept_id)
+        REFERENCES department(dept_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+        );
+
+if you update the parent id and it s automatically update the child id
+
+ 
+ UPDATE department SET dept_id = 201 WHERE dept_id = 101;
+
+********************************************************************************************
+VIEWS
+********************************************************************************************
+A View is a virtual table created from the result of a SQL query. It stores the query definition and presents data from one or more underlying tables.
+
+Command : check all view in our databases 
+
+SHOW FULL TABLES WHERE table_type = 'VIEW';
+
+-> SHOW FULL TABLES;  [Check views exits]
+
+-> SELECT DATABASES (); [check current databases]
+  
+Practice :
+
+---> Check your table:
+  
+  SELECT * FROM students;
+
+---> Create a view:
+
+  CREATE VIEW student_view AS SELECT id, name FROM students;
+
+---> Display the view :
+
+  SELECT * FROM students_view;
+
+
+USING WHERE CALUSE :
+
+To show only a filtered subset of data without writing the same WHERE condition every time.
+
+practice:
+
+---> Create a view :
+
+ CREATE VIEW BCA_students AS SELECT id, name, dept_id FROM students WHERE dept_id = 201;
+
+---> Check the table:
+
+SELECT * FROM BCA_students;
+
+**************************************************************************************
+USING VIEW JOIN :
+A View can be created using JOIN to combine data from two or more tables into a single virtual table. This helps simplify complex queries and provides users with related information in one place.
+
+practice:
+
+---> Create a View :
+ 
+  CREATE VIEW students_department_view AS s.id, s.name, d.dept_name FROM students s INNER JOIN department d WHERE s.dept_id = d.dept_id;
+
+---> Display the view:
+
+ SELECT * FROM students_department_view;
+
+
+REPLACE VIEW :
+CREATE OR REPLACE VIEW is used to create a new view or replace the definition of an existing view without manually dropping it first.
+
+practice :
+
+---> Create a view :
+
+CREATE OR REPLACE VIEW students_view AS SELECT id, name, dept_id FROM students;
+
+---> Display view :
+
+SELECT * FROM studets_view;
+
+DROP VIEW :
+DROP VIEW permanently removes a view from the database. It deletes only the view definition and does not delete the underlying table or its data.
+
+command :
+
+DROP VIEW view-name;
+
+Example :
+
+DROP VIEW BCA_students;
+
+***********************************************************************************************************
+AGGREGATE FUNCTION
+***************************************************************************************************
+1.COUNT() : COUNT() is an aggregate function used to count the number of rows in a table.
+
+  Command : SELECT COUNT(*) FROM table_name;
+
+  Example : SELECT COUNT(*) FROM customers;
+
+2.SUM() : SUM() is an aggregate function used to calculate the total of all numeric values in a column.
+
+  Command : SELECT SUM(column_name) FROM table_name;
+
+  Example : SELECT SUM(price) FROM products;
+
+
+3.AVG() : AVG() is an aggregate function used to calculate the average value of a numeric column.
+
+
+  Command : SELECT AVG(column_name) FROM table_name;
+
+  Example : SELECT AVG(price) FROM products;
+
+
+4.MAX() : MAX() is an aggregate function used to find the highest value in a column.
+
+  Command : SELECT MAX(column_name) FROM table_name;
+
+  Example : SELECT MAX(price) FROM products;
+
+5.MIN() : MIN() is an aggregate function used to find the lowest value in a column.
+
+  Command : SELECT MIN(column_name) FROM table_name;
+
+  Example : SELECT MIN(price) FROM products;
+
+********************************************************************************************************
+GROUP BY & HAVING BY clause
+
+********************************************************************************************************
+GROUP BY : GROUP BY is used to group rows having the same value in a column and perform aggregate functions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
