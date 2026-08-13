@@ -113,7 +113,10 @@ Command 21:DELETE FROM table_name WHERE condition;
  ->Use to deleting the duplicate & particular data 
 
  Example:DELETE FROM students WHERE id=1002;
-
+============================================================================
+ALTER COMMANDS
+============================================================================
+1. ADD COLUMN:
 
 command 22:ALTER TABLE table_name ADD coloumn_name;
 
@@ -125,11 +128,15 @@ Example: ALTER TABLE employees ADD emp_age INT;
 
  Example : ALTER TABLE employees ADD emp_DOB DATE;
 
+2.MODIFY COLUMN :
+
  command 23: ALTER TABLE table_name MODIFY COLUMN column_name datatype;
 
  -->use to change the datatype
 
  Example : ALTER TABLE table_name MODIFY COLUMN emp_DOB DATE;
+
+3.DROP COLUMN : 
 
 command 24: ALTER TABLE table_name DROP COLUMN column_name;
 
@@ -137,9 +144,57 @@ command 24: ALTER TABLE table_name DROP COLUMN column_name;
 
 Example : ALTER TABLE employees DROP COLUMN emp_age;
 
-Rename column : ALTER TABLE department RENAME COLUMN id TO dept_id;
+4. RENAME COLUMN :
+   
+   command : ALTER TABLE table_name RENAME COLUMN column_name TO column_name;
+  
+   Example : ALTER TABLE department RENAME COLUMN id TO dept_id;
 
----> use to rename the column 
+5.CHANGE COLUMN  :
+      can change column and datatype 
+
+      command : ALTER TABLE table_name CHANGE colum_name column_name DATATYPE;
+
+      Example : ALTER TABLE students CHANGE student_name full_name VARCHAR(100);
+
+6. RENAME TABLE NAME :
+      
+      Change the table name
+
+      command : ALTER TABLE table_name RENAME TO change_name;
+
+      Example : ALTER TABLE students RENAME TO college_students;
+
+7. ADD PRIMARY KEY :
+    
+      command : ALTER TABLE table_name ADD PRIMARY KEY(column_name);
+
+      Example : ALTER TABLE students ADD PRIMARY KEY(student_id);
+
+8.DROP PRIMARY KEY :
+      
+      command : ALTER TABLE table_name DROP PRIMARY KEY;
+
+      Example : ALTER TABLE students DROP PRIMARY KEY;
+
+9.ADD FOREIGN KEY :
+      
+      command : ALTER TABLE table_name 
+                ADD CONSTRAINT fk_table_name
+                FOREIGN KEY (column_name)
+                REFERENCES table_name(column_name);
+
+      EXAMPLE : ALTER TABLE students
+                ADD CONSTRAINT fk_department
+                FOREIGN KEY (dept_id)
+                REFERENCES department(dept_id);
+
+10.DROP FOREIGN KEY :
+
+     command : ALTER TABLE table_name DROP FOREIGN KEY fk_table_name;
+
+     Example : ALTER TABLE department DROP FOREIGN KEY fk_department;
+=========================================================================
 
 command 25: SELECT * FROM employees LIMIT number;
 
@@ -508,7 +563,7 @@ GROUP BY & HAVING BY clause
 
 ********************************************************************************************************
 GROUP BY : GROUP BY is used to group rows having the same value in a column and perform aggregate functions
-
+           like COUNT(), SUM(), MIN(), MAX() and AVG() can be applied each group.
 
 
 
