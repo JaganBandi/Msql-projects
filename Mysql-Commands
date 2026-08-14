@@ -356,9 +356,24 @@ Filter the Condition :
 
 4.SELF JOIN : A SELF JOIN is a join in which a table is joined with itself. It is commonly used to represent hierarchical relationships such as Employee–Manager.
 
-Syntax : SELECT a.column1, b.column2 FROM table_name a JOIN table_name b ON a.comman_column = b.comman_column;
+Syntax : SELECT columns
+         FROM table1 a
+         JOIN table1 b
+         ON a.column = b.column;
 
 Example : SELECT e.emp_name AS Employee, m.emp_name AS Manager FROM employee_manager e LEFT JOIN employee_manager m ON e.manager_id = m.emp_id;
+
+5.CROSS JOIN : CROSS JOIN combines every row from the first table with every row from the second table
+
+ it doesnot require the ON condition 
+
+ INNER JOIN = Match
+ CROSS JOIN = Combination
+
+Syntax : SELECT column1, column2
+         FROM table1 
+         CROSS JOIN table2;
+
 
 
 ************************************************************************************************************************
@@ -558,12 +573,56 @@ AGGREGATE FUNCTION
 
   Example : SELECT MIN(price) FROM products;
 
-********************************************************************************************************
-GROUP BY & HAVING BY clause
+*****************************************************************************************************
+INDEXES 
+*****************************************************************************************************
+An Index is a database object that helps MySQL find rows faster when searching or retrieving data from a table
 
-********************************************************************************************************
-GROUP BY : GROUP BY is used to group rows having the same value in a column and perform aggregate functions
-           like COUNT(), SUM(), MIN(), MAX() and AVG() can be applied each group.
+Syntax : CREATE INDEX index_name 
+         ON table_name(column_name);
+
+B-TREE = Balenced TREE is the index structure MySQL commonly uses to organize indexed values so that it can search, sort, and find ranges efficiently.
+
+
+Example : CREATE INDEX idx_employee_name
+          ON employees(emp_name);
+
+VERIFY : SHOW INDEX FROM employees;
+
+DROP INDEX FROM TABLE : 
+
+ command & Example : DROP INDEX idx_employee_name ON employees;
+==================================================================================================
+1. UNIQUE INDEX : A UNIQUE INDEX is an index that prevents duplicate values in a column while also providing an index for that column.
+
+Syntax : CREATE UNIQUE INDEX index_name
+         ON table_name(column_name);
+
+Example : CREATE UNIQUE INDEX idx_unique_email
+          ON employee_details(email); 
+
+CREATE UNIQUE INDEX → Create
+SHOW INDEX          → View
+EXPLAIN             → Check usage
+DROP INDEX          → Remove
+
+EXAPLIN  : to diagnose, profile, and optimize database queries by forcing the database optimizer to reveal its execution plan
+===================================================================================================
+2. COMPOSITE INDEX : A Composite index is an index created one or more columns of a table
+
+Syntax : CREATE INDEX idx_name
+         ON table_name(column 1, column 2);
+
+column1 -> First indexed column
+
+column2 -> Second indexed column 
+
+Example : CREATE INDEX idx_name_manager
+          ON employees(emp_name, manager_id);
+
+
+
+
 
 
 
