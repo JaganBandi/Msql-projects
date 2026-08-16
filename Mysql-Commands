@@ -620,6 +620,27 @@ column2 -> Second indexed column
 Example : CREATE INDEX idx_name_manager
           ON employees(emp_name, manager_id);
 
+====================================================================================================
+* GROUP BY CLAUSE: GROUP BY is a sql clause used to group of rows that have same values in one or more columns usally to perform the aggregate functions such as COUNT(), AVG(), MIN(), SUM(), and MAX().
+
+Syntax : SELECT column_name , Aggregate_function(column_name)
+         FROM table_name
+         GROUP BY column_name;
+
+Example: SELECT customer_id, COUNT(*)
+         FROM orders
+         GROUP BY customer_id;
+
+
+
+* HAVING : HAVING is a sql clause used to filter a groups created by GROUP BY clause usually using aggregate functions
+
+ Syntax : SELECT column_name , aggregate_function(column_name)
+          FROM table_name
+          GROUP BY column_name
+          HAVING CONDITION;
+
+
 
 
 
