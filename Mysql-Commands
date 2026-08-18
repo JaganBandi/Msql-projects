@@ -640,6 +640,21 @@ Example: SELECT customer_id, COUNT(*)
           GROUP BY column_name
           HAVING CONDITION;
 
+WHERE + GROUP + HAVING :
+
+WHERE  : filter the invidival rows
+
+GROUP : group of rows
+
+HAVING : filter the after create groups
+
+====================================================================================================
+RELATION SHIPS : A relationship is databases defines define how data in one table is connected to another table
+
+1. one to many : [one department with many students]
+
+A one-to-many relationship occurs when one record in a parent table can be associated with multiple records in a child table, while each child record is associated with one parent record.
+
 
 
 
