@@ -407,13 +407,13 @@ dept_id (FOREIGN KEY)
 
 
 ***********************************************************************************************************
-ON DELETE CASECADE
+1. ON DELETE CASECADE
 ***********************************************************************************************************
 ON DELETE CASCADE is a Foreign Key option that automatically deletes related rows from the child table when the corresponding row in the parent table is deleted.
 
 Example :
 
-1. Crate table :
+a. Crate table :
     
     CREATE TABLE students (
         id INT PRIMARY KEY,
@@ -426,11 +426,19 @@ Example :
 
       this is a child table 
 
-2. Delete parent table :
+b. Delete parent table :
   
      DELETE FROM department WHERE dept_id = 101;
 
     if you delete the parent table where the dept_id 101 it automaticall delete the child table where dept_id = 101.
+
+2.ON DELETE RESRTICT : ON DELETE RESTRICT prevents deleting a parent row if related child rows exist
+
+   Syntax : FOREIGN KEY (dept_id)
+            REFERENCES departments_restrict(dept_id)
+            ON DELETE RESTRICT;
+
+
 
 *************************************************************************************************
 ON UPDATE CASCADE
@@ -655,6 +663,8 @@ RELATION SHIPS : A relationship is databases defines define how data in one tabl
 
 A one-to-many relationship occurs when one record in a parent table can be associated with multiple records in a child table, while each child record is associated with one parent record.
 
+
+Referal Integrity : Referential integrity is a database rule that ensures a foreign key value in the child table refers to an existing key value in the parent table.
 
 
 
