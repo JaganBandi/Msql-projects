@@ -439,6 +439,15 @@ b. Delete parent table :
             ON DELETE RESTRICT;
 
 
+3.ON DELETE SET NULL : ON DELETE SET NULL automatically sets the foreign key value of related child rows to NULL when the referenced parent row is deleted.
+
+
+  Synatax : colunm INT NULL
+            FOREIGN KEY (dept_id)
+            REFERENCES department_null(dept_id)
+            ON DELETE SET NULL
+
+
 
 *************************************************************************************************
 ON UPDATE CASCADE
@@ -447,7 +456,7 @@ ON UPDATE CASCADE automatically updates the matching Foreign Key values in the c
 
 Example :
 
-1. Crate table :
+a. Crate table :
     
     CREATE TABLE students (
         id INT PRIMARY KEY,
@@ -463,6 +472,19 @@ if you update the parent id and it s automatically update the child id
 
  
  UPDATE department SET dept_id = 201 WHERE dept_id = 101;
+
+
+ 2.ON UPDATE RESTRICT :ON UPDATE RESTRICT prevents updating a referenced key in the parent table when related child records exist
+
+ Syntax : 
+       CREATE TABLE child_table (
+    column1 datatype,
+    foreign_key_column datatype,
+
+    FOREIGN KEY (foreign_key_column)
+    REFERENCES parent_table(parent_key_column)
+    ON UPDATE RESTRICT
+);
 
 ********************************************************************************************
 VIEWS
@@ -665,6 +687,10 @@ A one-to-many relationship occurs when one record in a parent table can be assoc
 
 
 Referal Integrity : Referential integrity is a database rule that ensures a foreign key value in the child table refers to an existing key value in the parent table.
+
+
+2. one-to-one : A one-to-one relationship is a relationship where one record in one table is associated with exactly one record in another table
+
 
 
 
