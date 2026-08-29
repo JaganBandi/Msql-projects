@@ -25,7 +25,11 @@ command 5: CREATE TABLE table_name(
 
 Command 6: SHOW TABLES;
 
-->To see the tables
+ ->To see the tables
+
+SHOW TABLES FROM database_name;
+
+Example : SHOW TABLES FROM campusstay;
 
 Command 7: DESC table_name;
 
@@ -690,6 +694,72 @@ Referal Integrity : Referential integrity is a database rule that ensures a fore
 
 
 2. one-to-one : A one-to-one relationship is a relationship where one record in one table is associated with exactly one record in another table
+
+3. Many-to-Many : A many-to-many relationship is a relationship where multiple records in one table can be associated with multiple records in another table
+
+  Junction Table : A junction table is an intermediate table used to implement a many-to-many relationship between two tables
+
+===================================================================================================
+MIGRATE : copy the individual tables
+
+COPY THE TABLE STRUCTUE
+
+SYNTAX : CREATE TABLE database_name.table_name 
+         LIKE database_name.table_name;
+
+
+Example : CREATE TABLE schooldb.students 
+          LIKE campusstay.stuents;
+
+it is only the copythe structure not the data 
+
+copy the data :
+  
+Syntax : INSERT INTO database_name.table_name
+         SELECT * 
+         FROM database_name.table_name
+
+Example : INSERT INTO schooldb.students
+          SELECT *
+          FROM campusstay.students;
+
+
+MYSql DUMP :
+
+ mysqldump is a MySQL command-line utility used to create a backup of a database or table by exporting its structure and data into a SQL file.
+
+Steps :
+
+1. Check version :
+
+   mysqldump --version
+
+2.
+   
+==================================================================================================
+SUBQUERY :
+===================================================================================================
+A subquery is a query written inside another SQL query.
+
+Syntax :
+        
+         SELECT column
+         FROM table
+         WHERE column > (
+            SELECT aggregate_function(column)
+             FROM table
+           );
+
+Structue :
+
+         id="8p3jv1"
+                MAIN QUERY
+                    ↓
+             salary > ( ? )
+                         ↓
+                    SUBQUERY
+                         ↓
+                 AVG(salary)
 
 
 
