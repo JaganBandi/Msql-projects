@@ -734,12 +734,46 @@ Steps :
 
    mysqldump --version
 
-2.
+2.Syntax : mysqldump -u <username> -p <database_name> > <backupfile.sql>
+
+  Example : mysql -u root -p campusstay > /opt/database_backup.sql
+
+3. verify : ls -lh /opt/database_backup.sql
+
+4. Compress the SQL Backup Using tar.gz
+
+   tar is used to create an archive, and gzip compresses the archive. The .tar.gz format is commonly used for Linux backups.
+
+Syntax : tar -czvf /opt/database_backup.tar.gz  /opt/database_backup.sql
+
+Example : tar -czvf /opt/database_backup.tar.gz /opt/database_backup.sql
    
+5. View the contents of .tar.gz 
+
+ Syntax : tar -tzvf <archive.tar.gz>
+
+ Example : tar -tzvf /opt/database_backup.sql
+
+6. Extract Unarchive the .tar.gz 
+
+ Syntax : tar -xzvf <archive.tar.gz> -C <destination>
+
+ Example : tar -xzvf /opt/database_backup.tar.gz -C /
+
+ Recreate the .tar.gz into .sql
+
+7. Restore to Mysql Database 
+
+ a. login into mysql 
+
+ b. create database & exit;
+ 
+ c. Restore : mysql -u root -p campusstay_restore < /opt/database_backup.sql
+
 ==================================================================================================
 SUBQUERY :
 ===================================================================================================
-A subquery is a query written inside another SQL query.
+ A subquery is query written inside the another query ,the inner query it produce the resutls and the outer query is uses the inner query result to produce the final result
 
 Syntax :
         
@@ -760,6 +794,13 @@ Structue :
                     SUBQUERY
                          ↓
                  AVG(salary)
+
+Example : SELECT * FROM employee_sub
+          WHERE salary > (SELECT AVG(salary) FROM employee_sub);
+
+Subquery with IN : 
+
+IN is useful when the subquery can return multiple values.
 
 
 
