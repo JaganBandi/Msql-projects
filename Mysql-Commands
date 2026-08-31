@@ -802,6 +802,27 @@ Subquery with IN :
 
 IN is useful when the subquery can return multiple values.
 
+Subquery with = : 
+
+= operator is useful when we return only one value
+
+
+MAX : SELECT *
+     FROM table_name
+    WHERE column = (
+        SELECT MAX(column)
+        FROM table_name
+    );
+
+Co-related query : A correlated subquery is a subquery that references a column from the outer query and is evaluated based on each row processed by the outer query.
+
+Syntax : SELECT column1, column2
+          FROM table_name outer_alias
+          WHERE column_name operator (
+          SELECT aggregate_function(column_name)
+          FROM table_name
+          WHERE inner_column = outer_alias.column
+          );
 
 
 
