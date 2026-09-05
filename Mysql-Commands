@@ -867,6 +867,35 @@ Comman operators :
 
 ALL :  ALL is a subquery operator that returns TRUE when the comparison condition is satisfied for every value returned by the subquery.
 
+Syntax : SELECT *
+         FROM table_name 
+        WHERE column operator ALL (
+          SELECT column
+          FROM table_name
+         );
+
+Derived Table : A derived table is a subquery in the FROM clause, that produces a temporary results set which can be used by the outer query
+
+Syntax : SELECT column1, column2
+          FROM (
+          SELECT column1, column2
+           FROM table_name
+           WHERE condition
+            ) AS alias_name; 
+
+WITH WHERE IN outer query : 
+
+  Syntax : SELECT column1, column2
+          FROM (
+          SELECT column1, column2
+           FROM table_name
+           WHERE condition
+            ) AS alias_name
+            WHERE condition operator (
+            SELECT AGGFUNCTION(column_name)
+            FROM table_name
+            );
+
 
 
 
