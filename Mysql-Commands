@@ -617,6 +617,10 @@ Syntax : CREATE INDEX index_name
 
 B-TREE = Balenced TREE is the index structure MySQL commonly uses to organize indexed values so that it can search, sort, and find ranges efficiently.
 
+Definition:
+
+A B-Tree index is an index structure that keeps indexed values organized so MySQL can find specific values and ranges efficiently instead of checking every row. MySQL documents B-tree indexes as supporting lookups such as =, >, <, BETWEEN, and IN
+
 
 Example : CREATE INDEX idx_employee_name
           ON employees(emp_name);
@@ -654,6 +658,28 @@ column2 -> Second indexed column
 Example : CREATE INDEX idx_name_manager
           ON employees(emp_name, manager_id);
 
+
+leftmost-prefix : The leftmost-prefix rule states that a composite index can be efficiently used starting from its leftmost column and continuing through subsequent indexed columns. The order of columns in the composite index is therefore important.
+
+
+Explain :
+ 
+ EXPLAIN is a MySQL command used to show how MySQL plans to execute a SQL query.
+
+Syntax :
+
+ EXPLAIN
+ SELECT column1, column2
+ FROM table_name 
+ WHERE condition;
+
+ It is used for :
+
+Will MySQL use an index?
+Which index will it use?
+How many rows may it examine?
+Is it doing a full table scan?
+What type of lookup is being performed?
 ====================================================================================================
 * GROUP BY CLAUSE: GROUP BY is a sql clause used to group of rows that have same values in one or more columns usally to perform the aggregate functions such as COUNT(), AVG(), MIN(), SUM(), and MAX().
 
@@ -883,7 +909,7 @@ Syntax : SELECT column1, column2
            WHERE condition
             ) AS alias_name; 
 
-WITH WHERE IN outer query : 
+with WHERE in outer query : 
 
   Syntax : SELECT column1, column2
           FROM (
@@ -897,9 +923,64 @@ WITH WHERE IN outer query :
             );
 
 
+DERIVED TABLE WITH GROUP BY() AND AGGREGATE FUNCTION :
+
+A derived table is a subquery in the FROM clause that creates a temporary result set. It can contain GROUP BY and aggregate functions to summarize data, and the outer query can then filter or process that summarized result.
+
+Syntax :
+
+SELECT columns
+FROM (
+    SELECT group_column,
+           AGGREGATE_FUNCTION(column) AS calculated_column
+    FROM table_name
+    GROUP BY group_column
+) AS derived_table
+WHERE condition;
 
 
+Subquery with select :
+A subquery in SELECT is a subquery written inside the SELECT clause to calculate or retrieve an additional value that is displayed as a column in the result.
 
+Syntax :
+
+SELECT
+    column1,
+    column2,
+    (SELECT aggregate_function(column)
+     FROM table_name) AS alias
+FROM table_name;
+
+Corelated with Subquery : 
+
+A correlated subquery in SELECT is a subquery inside the SELECT clause that depends on a value from the current row of the outer query.
+
+Syntax : 
+
+SELECT
+    outer_column,
+    (
+        SELECT AGGREGATE_FUNCTION(inner_column)
+        FROM table_name AS inner_alias
+        WHERE inner_alias.group_column = outer_alias.group_column
+    ) AS calculated_column
+FROM table_name AS outer_alias;
+
+Nested Subquery : 
+
+A Nested subquery is subquery placed in another subquery ,The Inner query provides a result to the query Containing it 
+
+Syntax :
+ SELECT columns
+FROM table_name
+WHERE column > (
+    SELECT AGGREGATE_FUNCTION(column)
+    FROM table_name
+    WHERE condition
+);
+
+
+   
 
 
 
