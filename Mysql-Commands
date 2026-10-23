@@ -574,6 +574,9 @@ DROP VIEW BCA_students;
 ***********************************************************************************************************
 AGGREGATE FUNCTION
 ***************************************************************************************************
+Aggregate functions perform calculations on a set of rows and return a single result. Common aggregate functions are COUNT(), SUM(), AVG(), MIN(), and MAX().
+
+
 1.COUNT() : COUNT() is an aggregate function used to count the number of rows in a table.
 
   Command : SELECT COUNT(*) FROM table_name;
@@ -978,9 +981,130 @@ WHERE column > (
     FROM table_name
     WHERE condition
 );
+************************************************************************************************************
+NORMALIZATION :
+************************************************************************************************************
+Normalization is a database design technique used to organize the data into tables properly and reduce deplicates (reduant data)
+
+1.1NF : First Normal Form 
+
+1NF (First Normal Form) means each cell should contain one atomic/single value, and there should not be repeating groups or multiple values stored in one cell.
+
+Example :
+ INSERT INTO student_skills VALUES
+(1, 'Jagan', 'Python'),
+(1, 'Jagan', 'SQL'),
+(1, 'Jagan', 'Docker');
+
+here each column should contain a sigle value 
+
+2.2nf: Second Normal Form:
+
+2NF (Second Normal Form) is a database normalization rule.
+
+A table is in 2NF when:
+
+It is already in 1NF
+There is no partial dependency   
+
+Partial dependency : A non-key column depends on only part of a composite primary key, instead of depending on the entire composite primary key.
+
+2NF (Second Normal Form) is a normalization form in which a table is already in 1NF and every non-key attribute is fully dependent on the entire candidate key. It removes partial dependency.
 
 
-   
+3.3nf: Third normal form:
+
+1. Definition
+
+3NF (Third Normal Form) is a database normalization form where:
+
+The table must already be in 2NF.
+There should be no transitive dependency.
+
+transitive dependency:
+
+It means a non-key column depends on another non-key column, instead of depending directly on the primary key.
+
+Normalization is the process of organizing data into multiple related tables to reduce data redundancy and avoid data anomalies such as insert, update, and delete anomalies.
+
+-----------------------------------------------------------------------------------------------------------------
+Transaction :
+
+A transaction is group of SQL operation treated as a single logical unit of work , Either changes or saved together, or they can be undone together
+
+--> transaction help maintain data accuracy and consistency when multiple relation opreation must succed togather
+
+Transaction syntax:
+
+
+Syntax : START TRANSACTION; --> This begins the transactions;
+Syntax : COMMIT;
+Syntax : ROLLBACK;
+
+commit : COMMIT is SQL command that permanently  saves the changes made during the current transaction
+
+START TRANSACTION;
+
+-- SQL operation go here
+
+  COMMIT;
+
+rollback : ROLLBACK  is SQL command that cancels the uncommited changes made during the current transaction
+
+START TRANSACTION;
+
+-- SQL operations go here
+
+ROLLBACK;
+
+
+SAVEPOINT : A SAVEPOINT creates a named point inside a transaction that you can roll back to, without undoing the entire transaction.
+
+Syntax :
+
+START TRANSACTIONS;
+
+SAVEPOINT save_point_name;
+
+sql operations
+
+ROLLBACK TO SAVEPOINT save_point_name;
+
+
+START TRANSACTION : START TRANSACTION begins a transaction so that changes can be committed or rolled back.
+
+SAVEPOINT : A SAVEPOINT marks a point inside a transaction that lets us roll back later changes without undoing everything before that point.
+
+SAVEPOINT savepoint_name;
+
+
+ROLLBACK TO SAVEPOINT save_point_name : This undoes changes made after the savepoint, while preserving the earlier uncommitted
+
+RELEASE SAVEPOINT  : RELEASE SAVEPOINT removes a named savepoint from the current transaction. It does not undo or commit any data changes.
+
+Syntax : RELEASE SAVEPOINT savepoint_name;
+
+
+
+ACID PROPERTIES : 
+
+A - > Atomicity
+
+C -> Consitency
+
+I -> Isolation
+
+D -> Durability
+
+Atomicity : Atomicity ensures a transaction is treated as one complete unit: either all its operations succeed, or the transaction's changes are rolled back
+
+
+Consistency : Consistency ensures that a transaction preserves database rules and constraints, moving the database from one valid state to another valid state.
+
+
+Isolation : Isolation ensures that concurrent transactions are managed so they do not interfere with each other incorrectly. MySQL provides isolation levels to control the visibility of changes between transactions.
+
+
 
 
 
