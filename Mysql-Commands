@@ -1104,6 +1104,164 @@ Consistency : Consistency ensures that a transaction preserves database rules an
 
 Isolation : Isolation ensures that concurrent transactions are managed so they do not interfere with each other incorrectly. MySQL provides isolation levels to control the visibility of changes between transactions.
 
+Durablity : Durability ensures that once a transaction is committed, its changes persist even after a system failure or database restart.
+
+-------------------------------------------------------------------------------------------------------------------------
+MySql Architecure :
+
+MySql Architecure is a sturcture of componentes that works together to recive the Sql queries,process them, access Store data and return results to the user
+
+Mysql Client
+
+Mysql workbench, command-line-tool, or an application
+  ^
+  | |
+    
+Sql request query results over a connection
+
+  |
+
+  Mysql Server --> recive and process the sql queries
+  ^
+  |  |
+
+Storage Engine and Data --> access and manage the data stored in database tables
+
+
+Querry Processing :
+
+Steps : 
+
+Step 1 : Connections Handiling 
+Accepts the Client Connection request
+
+Step 2 : Parsing 
+Checks the Sql syntax and build interpersonal representation
+
+Step 3 : Optimization
+
+Checks the an Efficient way to excute the query
+
+Step 4 : Exectution
+
+Excutes the query and access the data through the storage engine
+
+Step 5 : Return Results
+
+Sends the results rows or an error to the client
+
+Storage Engines :
+
+A storage engine is a my sql component for storing , retriving, managing the data in database tables
+
+Two Important Storage engines
+
+1. inno db
+
+Supports transactions such as COMMIT and ROLLBACK.
+Supports foreign keys.
+Provides row-level locking and crash recovery.
+It is the default storage engine in modern MySQL versions.   
+
+2. MyISAM :
+
+Does not support transactions.
+Does not support foreign keys.
+Uses table-level locking.
+Often encountered in older MySQL databases.
+
+-----------------------------------------------------------------------------------------------------------------
+Database Permissions :
+
+Database privileges are permissions that determine which operations a MySQL user can perform on database objects, such as databases, tables, and other resources.
+
+
+-> Display All Mysql Users
+
+Command : SELECT Users, Host
+          FROM mysql.user;
+
+-> Check the  Current account
+
+Command : SELECT CURRENT_USER();
+
+-> Check the Particular User
+
+Command : SELECT User, Host
+          FROM mysql.user
+          WHERE User = 'teacher'
+
+-> Create User
+
+Command : CREATE USER 'user_name'@'localhost'
+          IDENTIFIED BY 'password';
+
+-> Check Password Policy
+
+Command : SHOW VARIABLES LIKE 'validate_password%';
+
+-> Set New Password
+
+ALTER USER 'username'@'host'
+IDENTIFIED BY 'New_password';
+
+-> Drop User
+
+DROP USER 'username'@'host';
+
+1. GRANT : 
+
+GRANT is a MySql Command Used to give a specific privileges to mysql user
+
+Syntax :
+
+GRANT privilege_name
+ON database_name.table_name
+TO 'username'@'host';
+
+Grant Multiple Privileges 
+
+GRANT privilege_name1, privilege_name2, privilege_name3
+ON database_name.table_name
+TO 'username'@'localhost';
+
+Grant All Privileges
+
+GRANT ALL PRIVILEGES
+ON database_name,table_name
+TO 'username'@'localhost';
+
+
+GRANT all Permisiions on all Databases
+
+GRANT All PRIVILEGES
+ON *.*
+TO 'username'@'localhost';
+
+
+--> Verify the permissions
+
+Command : SHOW GRANTS FOR 'Teacher'@'localhost'; 
+
+GRANT all permissions on all tables in database
+
+GRANT PRIVILEGES
+ON database_name.*
+TO 'username'@'localhost'; 
+
+
+2. REVOKE : 
+
+REVOKE  is a SQL used to remove the sql permission to the users
+
+Syntax : 
+
+REVOKE privileges_name
+ON database_name.table_name
+FROM 'Username'@'host';
+
+
+
 
 
 
